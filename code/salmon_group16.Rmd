@@ -7,5 +7,33 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(lubridate)
+library(tsibble)
+library(feasts)
+library(slider)
 ```
+
+## Overview
+
+* Image
+* Summary
+* Map of fish ladder location
+* Data Citation
+
+### Read in the data
+```{r}
+fish <- read_csv(here("data", "willamette_fish_passage.csv")) %>% clean_names()
+```
+
+### Convert to tsibble
+
+```{r}
+fish_ts <- fish %>% 
+  mutate(date = lubridate::mdy(date)) %>% 
+  as_tibble(key = Null, index = date)
+```
+
 
