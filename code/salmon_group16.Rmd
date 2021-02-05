@@ -16,7 +16,7 @@ library(feasts)
 library(slider)
 ```
 
-## Overview
+# Overview
 
 * Image
 * Summary
