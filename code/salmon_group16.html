@@ -9,7 +9,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Anna Talken, Alex Ehrens, and Annika Leiby" />
+<meta name="author" content="Anna Talken, Alex Ehrens, &amp; Annika Leiby" />
+
 
 
 <title>ESM 244 Assignment 2 Task 1</title>
@@ -174,7 +175,7 @@ summary {
 
 
 <h1 class="title toc-ignore">ESM 244 Assignment 2 Task 1</h1>
-<h4 class="author">Anna Talken, Alex Ehrens, and Annika Leiby</h4>
+<h4 class="author">Anna Talken, Alex Ehrens, &amp; Annika Leiby</h4>
 <h4 class="date">2/2/2021</h4>
 
 </div>
@@ -191,26 +192,6 @@ summary {
 <div id="read-in-the-data" class="section level3">
 <h3>Read in the data</h3>
 <pre class="r"><code>fish &lt;- read_csv(here(&quot;data&quot;, &quot;willamette_fish_passage.csv&quot;)) %&gt;% clean_names()</code></pre>
-<pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
-## cols(
-##   Project = col_character(),
-##   Date = col_character(),
-##   `Chinook Run` = col_logical(),
-##   Chinook = col_double(),
-##   `Jack Chinook` = col_double(),
-##   Steelhead = col_double(),
-##   `Wild Steelhead` = col_logical(),
-##   Sockeye = col_logical(),
-##   Coho = col_double(),
-##   `Jack Coho` = col_double(),
-##   Shad = col_logical(),
-##   Lamprey = col_logical(),
-##   `Bull Trout` = col_logical(),
-##   Chum = col_logical(),
-##   Pink = col_logical(),
-##   TempC = col_double()
-## )</code></pre>
 </div>
 <div id="convert-to-tsibble" class="section level3">
 <h3>Convert to tsibble</h3>
