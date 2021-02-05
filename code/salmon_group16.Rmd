@@ -2,11 +2,13 @@
 title: "ESM 244 Assignment 2 Task 1"
 author: "Anna Talken"
 date: "2/2/2021"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(tidyverse)
 library(here)
 library(janitor)
@@ -37,3 +39,16 @@ fish_ts <- fish %>%
 ```
 
 
+## Time Series Summary {.tabset .tabset-fade .tabset-pills}
+
+### Time series
+
+(tab 1 content)
+
+### Seasonplots
+
+(tab 2 content)
+
+### Summary statistics and analysis
+
+(tab 3 content)
