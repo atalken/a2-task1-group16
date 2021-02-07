@@ -92,4 +92,35 @@ ggplot(data = fish_ts_long, aes(x = date, y = count, color = species)) +
 
 ### Summary statistics and analysis
 
-(tab 3 content)
+```{r}
+# Make annual counts by species
+
+fish_annual_counts <- fish_ts_long %>%
+  mutate(year = as.integer(year(date))) %>%
+    group_by(year, species) %>%
+  summarize(n = sum(count))
+
+# Make plot that displays this information
+
+fish_annual_counts_plot <- ggplot(data = fish_annual_counts, aes(x = year, y = n)) +
+  geom_col(aes(color = species, fill = species), show.legend = FALSE) +
+  theme_bw() +
+  facet_wrap(~species, dir = "v", scales = "free") +
+  scale_x_continuous(breaks = c(2001, 2004, 2007, 2010)) +
+  labs(title = "Annual Counts for Fish Passage by species in Willamette River, OR",
+       subtitle = "Jan. 2001 - Dec. 2010",
+       x = "Year",
+       y = "Number of fish observed (n)",
+       caption = "Figure XX - Annual totals for fish passage of three fish species (Coho in red, Jack Coho in green, \nSteelhead in blue) in the Willamette River from January 2001 to \nDecember 2010. Data from Columbia River DART.") +
+  theme(plot.caption = element_text(hjust = 0))
+  
+
+fish_annual_counts_plot
+
+                                    
+```
+#### Major Trends in Annual Totals by Species from 2000-2010
+
+-
+-
+-
