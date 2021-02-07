@@ -16,6 +16,7 @@ library(lubridate)
 library(tsibble)
 library(feasts)
 library(slider)
+library(patchwork)
 ```
 
 ## Overview
@@ -43,7 +44,47 @@ fish_ts <- fish %>%
 
 ### Time series
 
-(tab 1 content)
+```{r}
+### select only steelhead, coho, and jack coho species of salmon 
+fish_ts_original <- fish_ts %>% 
+  select(project, date, steelhead, coho, jack_coho)
+
+# change all NA values to 0
+fish_ts_original[is.na(fish_ts_original)] = 0
+
+# to make facet-wrapped plot, need to pivot this table into a longer format
+fish_ts_long <- fish_ts_original %>% 
+  pivot_longer(cols = steelhead:jack_coho,
+               names_to = "species",
+               values_to = "count") %>% 
+  mutate(species = case_when(
+    species == "coho" ~ "Coho",
+    species == "jack_coho" ~ "Jack Coho",
+    species == "steelhead" ~ "Steelhead"
+  ))
+```
+
+#### Original time series plots
+```{r}
+ggplot(data = fish_ts_long, aes(x = date, y = count, color = species)) +
+  geom_line(show.legend = FALSE) +
+  facet_wrap(~species, dir = "v", scales = "free") +
+  theme_bw() +
+  labs(title = "Time series of salmon passage observations by species in Willamette River, OR",
+       subtitle = "Jan. 1, 2001 - Dec. 31, 2010",
+       x = "Date",
+       y = "Number of fish observed",
+       caption = "Figure XX - Original time series data of the observed counts of three salmon species (Coho in red, Jack Coho in green, \nSteelhead in blue) passing through the Willamette River at the Willamette Falls fish ladder from January 1st, 2001 to \nDecember 31st, 2010. Data from Columbia River DART.")+
+  theme(plot.caption = element_text(hjust = 0))
+```
+
+#### Notable Trends and Patterns
+
+- All fish species counts seem to display some seasonality as to when peak observations occur, as spikes in fish passage are seem at roughly the same time of the calendar year for each species. Coho and Jack Coho salmon counts spike at roughly the same time of year as each other, and peak Steelhead season occurs a bit earlier in the calendar year. The 'Seasonplots' tab will investigate these patterns in more detail.
+- Jack Coho are observed the least out of the three species (max. ~400). For most of the time series, Steelhead was the most observed fish (max. ~700), but in the most recent two years (2009 & 2010), Coho observations reached the highest peaks of any species (max. ~1300).
+- From these time series plots, it is difficult to discern any overall annual trends in fish passage, with the exception of the rapid increase in peak Coho observations from 2007 to 2010. The 'Summary statistics and analysis' tab will investigate annual trends further.
+
+#### End of time series tab
 
 ### Seasonplots
 
