@@ -37,7 +37,7 @@ fish <- read_csv(here("data", "willamette_fish_passage.csv")) %>% clean_names()
 ```{r}
 fish_ts <- fish %>% 
   mutate(date = lubridate::mdy(date)) %>% 
-  as_tibble(key = Null, index = date)
+  as_tsibble(key = NULL, index = date)
 ```
 
 
@@ -81,7 +81,7 @@ ggplot(data = fish_ts_long, aes(x = date, y = count, color = species)) +
 
 #### Notable Trends and Patterns
 
-- All fish species counts seem to display some seasonality as to when peak observations occur, as spikes in fish passage are seem at roughly the same time of the calendar year for each species. Coho and Jack Coho salmon counts spike at roughly the same time of year as each other, and peak Steelhead season occurs a bit earlier in the calendar year. The 'Seasonplots' tab will investigate these patterns in more detail.
+- All fish species counts seem to display some seasonality as to when peak observations occur, as spikes in fish passage are seen at roughly the same time of the calendar year for each species. Coho and Jack Coho salmon counts spike at roughly the same time of year as each other, and peak Steelhead season occurs a bit earlier in the calendar year. The 'Seasonplots' tab will investigate these patterns in more detail.
 - Jack Coho are observed the least out of the three species (max. ~400). For most of the time series, Steelhead was the most observed fish (max. ~700), but in the most recent two years (2009 & 2010), Coho observations reached the highest peaks of any species (max. ~1300).
 - From these time series plots, it is difficult to discern any overall annual trends in fish passage, with the exception of the rapid increase in peak Coho observations from 2007 to 2010. The 'Summary statistics and analysis' tab will investigate annual trends further.
 
@@ -89,7 +89,56 @@ ggplot(data = fish_ts_long, aes(x = date, y = count, color = species)) +
 
 ### Seasonplots
 
-(tab 2 content)
+
+```{r, fig.cap = "Figure 2. Seasonality plot illustrating monthly trends in the number of Coho, Jack Coho and Steelhead salmon passing through the Willamette River from January 1, 2001 to December 31, 2010." }
+#Wrangle data to group the average fish count by month and year, for each species
+
+fish_ts_long %>% 
+  gg_season(y = count) +
+  facet_wrap(~species, ncol = 1) +
+  theme_minimal() +
+  labs(title = "Seasonality plot of fish passage counts in the Willamette River",
+       x = "Month",
+       y = "Count")
+
+
+#fish_ts_month <- fish_ts_original %>% 
+ # index_by(yr_mo = ~yearmonth(.)) %>% 
+  #summarize(monthly_mean_steelhead = mean(steelhead, na.rm = TRUE),
+            #monthly_mean_coho = mean(coho, na.rm = TRUE),
+            #monthly_mean_jack_coho = mean(jack_coho, na.rm = TRUE))
+
+# create a seasonplot for Coho
+
+#coho <- fish_ts_month %>% 
+  #gg_season(y = monthly_mean_coho, show.legend = FALSE) +
+  #theme_minimal() +
+  #labs(x = "Month",
+       #y = "Average monthly observed counts of Coho")
+
+#Create a seasonplot for Steelhead
+
+#steelhead <- fish_ts_month %>% 
+  #gg_season(y = monthly_mean_steelhead, show.legend = FALSE) +
+  #theme_minimal() +
+  #labs(x = "Month",
+      # y = "Average monthly observed counts of Steelhead")
+
+#Create a seasonplot for Jack Coho
+#jack_coho <- fish_ts_month %>% 
+  #gg_season(y = monthly_mean_jack_coho, show.legend = FALSE) +
+  #theme_minimal() +
+  #labs(x = "Month",
+      # y = "Average monthly observed counts of Jack Coho")
+
+#coho + steelhead + jack_coho + plot_layout(ncol = 1)
+```
+
+Seasonality plot trends:
+
+* The greatest numbers of Coho and Jack Coho Salmon are found passing through the Willamette River in the Fall around September/October.
+* Steelhead have more temporal variation in passage counts over the years, with Spring and Summer months typically exhibiting high numbers of fish passings, and very few Steelhead pass through the Willamette River from August through December. 
+* Recent years (2008-2010) have shown the highest numbers of Coho salmon passing through the Willamette River, reaching over 1,200 counts in 2010, but Jack Coho and Steelhead numbers have not shown the same increase in recent years. 
 
 ### Summary statistics and analysis
 
