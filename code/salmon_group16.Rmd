@@ -21,6 +21,7 @@ library(patchwork)
 
 ## Overview
 
+
 * Image
 * Summary
 * Map of fish ladder location
@@ -170,6 +171,6 @@ fish_annual_counts_plot
 ```
 #### Major Trends in Annual Totals by Species from 2000-2010
 
--
--
--
+- Both Coho and Jack Coho species experienced the lowest number of observed counts in the year 2007. Coho count for the year 2007 was 1050 and Jack Coho count in 2007 was only 164. Steelhead experienced its third lowest count during the year 2007, which indicates 2007 was not a good year for fish count observations across the board. 
+- Steelhead species typically have much higher counts as compared to Coho and Jack Coho species with a range of observations from 0-50,000. The range of Coho observations is 0-25,000 and the range of Jack Coho is even smaller from 0-3,000.
+
