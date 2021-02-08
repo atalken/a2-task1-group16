@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Barlow&display=swap');
+
+div {
+ background-color: darkseagreen;
+}
+
+h1 {
+  color: black;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+h4 {
+      text-align: center;
+}
+p {
+  font-family: monaco;
+  font-size: 20px;
+  border-style: solid;
+}
