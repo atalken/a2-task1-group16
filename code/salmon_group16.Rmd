@@ -37,7 +37,7 @@ knitr::include_graphics(here("figures", "Willamette_Falls_Locks_area_map.jpg"))
 
 ##### Using data from the Columbia Basin Research DART on fish passages at the Willamette Falls fish ladder in Oregon, this report presents a time series analysis to identify changes and patterns in fish observations from January 2001 to December 2010. The first time series analysis captures salmon passage observations over the ten year-period for Coho, Jack Coho and Steelhead salmon. Seasonplots are then used to illustrate the annual seasonal peaks in observed fish within each of the three species from 2001 to 2010. Finally, summary statistics illustrate observed trends in the number of observed fish for each of the three salmon species. 
 
-Data Citation: 
+**Citation:** Data Courtesy of [U.S. Army Corps of Engineers, NWD](http://www.nwd.usace.army.mil/) and [Chelan](http://www.chelanpud.org/), [Douglas](http://www.douglaspud.org/), and [Grant](http://www.gcpud.org/) County PUDs, [Yakima Klickitat Fisheries Project](http://www.ykfp.org/), [Colville Tribes Fish & Wildlife (OBMEP)](http://nrd.colvilletribes.com/obmep/), [Oregon Department of Fish & Wildlife](http://www.dfw.state.or.us/), [Washington Department of Fish & Wildlife](http://www.wdfw.wa.gov/).
 
 ```{r}
 fish <- read_csv(here("data", "willamette_fish_passage.csv")) %>% clean_names()
@@ -72,7 +72,7 @@ fish_ts_long <- fish_ts_original %>%
 ```
 
 #### Original time series plots
-```{r}
+```{r, fig.align='center'}
 ggplot(data = fish_ts_long, aes(x = date, y = count, color = species)) +
   geom_line(show.legend = FALSE) +
   facet_wrap(~species, dir = "v", scales = "free") +
@@ -94,7 +94,7 @@ ggplot(data = fish_ts_long, aes(x = date, y = count, color = species)) +
 ### Seasonplots
 
 
-```{r}
+```{r, fig.align='center'}
 #Wrangle data to group the average fish count by month and year, for each species
 
 fish_ts_long %>% 
@@ -116,7 +116,7 @@ fish_ts_long %>%
 
 ### Summary statistics and analysis
 
-```{r}
+```{r, fig.align='center'}
 # Make annual counts by species
 
 fish_annual_counts <- fish_ts_long %>%
