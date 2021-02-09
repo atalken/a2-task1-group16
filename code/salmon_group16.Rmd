@@ -34,10 +34,8 @@ knitr::include_graphics(here("figures", "willamette_falls_pano.jpg"))
 ```{r map, echo=FALSE, fig.cap="Map of the Fish Ladder at Willamette Falls. Photo credit: US Army Corps of Engineers", out.width='100%'}
 knitr::include_graphics(here("figures", "Willamette_Falls_Locks_area_map.jpg"))
 ```
-
 * Summary
 * Data Citation
-
 
 ```{r}
 fish <- read_csv(here("data", "willamette_fish_passage.csv")) %>% clean_names()
