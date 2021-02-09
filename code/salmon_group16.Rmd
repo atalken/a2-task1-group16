@@ -25,10 +25,17 @@ library(patchwork)
 
 ### Willamette Falls 
 
-![Photo by Jeff Green - Own work, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=12317559](figures/willamette_falls_pano.jpg)
+```{r photo, echo=FALSE, fig.cap="Panorama of the Willamette Falls. Photo credit: Jeff Green", out.width = '100%'}
+knitr::include_graphics(here("figures", "willamette_falls_pano.jpg"))
+```
+
+### Location of Willamette Falls fish ladder
+
+```{r map, echo=FALSE, fig.cap="Map of the Fish Ladder at Willamette Falls. Photo credit: US Army Corps of Engineers", out.width='100%'}
+knitr::include_graphics(here("figures", "Willamette_Falls_Locks_area_map.jpg"))
+```
 
 * Summary
-* Map of fish ladder location
 * Data Citation
 
 
