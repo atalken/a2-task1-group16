@@ -1,10 +1,11 @@
 ---
-title: "ESM 244 Assignment 2 Task 1"
+title: "Adult fish passage in the Willamette River, Oregon"
 author: "Anna Talken, Alex Ehrens, & Annika Leiby"
 date: "2/2/2021"
 output: 
   html_document:
     code_folding: hide
+    css: "group16.css"
 ---
 
 ```{r setup, include=FALSE}
@@ -30,19 +31,14 @@ library(patchwork)
 * Map of fish ladder location
 * Data Citation
 
-### Read in the data
+
 ```{r}
 fish <- read_csv(here("data", "willamette_fish_passage.csv")) %>% clean_names()
-```
 
-### Convert to tsibble
-
-```{r}
 fish_ts <- fish %>% 
   mutate(date = lubridate::mdy(date)) %>% 
   as_tsibble(key = NULL, index = date)
 ```
-
 
 ## Time Series Summary {.tabset .tabset-fade .tabset-pills}
 
@@ -78,7 +74,7 @@ ggplot(data = fish_ts_long, aes(x = date, y = count, color = species)) +
        subtitle = "Jan. 1, 2001 - Dec. 31, 2010",
        x = "Date",
        y = "Number of fish observed",
-       caption = "Figure XX - Original time series data of the observed counts of three salmon species (Coho in red, Jack Coho in green, \nSteelhead in blue) passing through the Willamette River at the Willamette Falls fish ladder from January 1st, 2001 to \nDecember 31st, 2010. Data from Columbia River DART.")+
+       caption = "Figure 1. Original time series data of the observed counts of three salmon species (Coho in red, Jack Coho in green, \nSteelhead in blue) passing through the Willamette River at the Willamette Falls fish ladder from January 1st, 2001 to \nDecember 31st, 2010. Data from Columbia River DART.")+
   theme(plot.caption = element_text(hjust = 0))
 ```
 
@@ -88,12 +84,10 @@ ggplot(data = fish_ts_long, aes(x = date, y = count, color = species)) +
 - Jack Coho are observed the least out of the three species (max. ~400). For most of the time series, Steelhead was the most observed fish (max. ~700), but in the most recent two years (2009 & 2010), Coho observations reached the highest peaks of any species (max. ~1300).
 - From these time series plots, it is difficult to discern any overall annual trends in fish passage, with the exception of the rapid increase in peak Coho observations from 2007 to 2010. The 'Summary statistics and analysis' tab will investigate annual trends further.
 
-#### End of time series tab
-
 ### Seasonplots
 
 
-```{r, fig.cap = "Figure 2. Seasonality plot illustrating monthly trends in the number of Coho, Jack Coho and Steelhead salmon passing through the Willamette River from January 1, 2001 to December 31, 2010." }
+```{r}
 #Wrangle data to group the average fish count by month and year, for each species
 
 fish_ts_long %>% 
@@ -102,42 +96,12 @@ fish_ts_long %>%
   theme_minimal() +
   labs(title = "Seasonality plot of fish passage counts in the Willamette River",
        x = "Month",
-       y = "Count")
-
-
-#fish_ts_month <- fish_ts_original %>% 
- # index_by(yr_mo = ~yearmonth(.)) %>% 
-  #summarize(monthly_mean_steelhead = mean(steelhead, na.rm = TRUE),
-            #monthly_mean_coho = mean(coho, na.rm = TRUE),
-            #monthly_mean_jack_coho = mean(jack_coho, na.rm = TRUE))
-
-# create a seasonplot for Coho
-
-#coho <- fish_ts_month %>% 
-  #gg_season(y = monthly_mean_coho, show.legend = FALSE) +
-  #theme_minimal() +
-  #labs(x = "Month",
-       #y = "Average monthly observed counts of Coho")
-
-#Create a seasonplot for Steelhead
-
-#steelhead <- fish_ts_month %>% 
-  #gg_season(y = monthly_mean_steelhead, show.legend = FALSE) +
-  #theme_minimal() +
-  #labs(x = "Month",
-      # y = "Average monthly observed counts of Steelhead")
-
-#Create a seasonplot for Jack Coho
-#jack_coho <- fish_ts_month %>% 
-  #gg_season(y = monthly_mean_jack_coho, show.legend = FALSE) +
-  #theme_minimal() +
-  #labs(x = "Month",
-      # y = "Average monthly observed counts of Jack Coho")
-
-#coho + steelhead + jack_coho + plot_layout(ncol = 1)
+       y = "Fish count",
+       caption = "Figure 2. Seasonality plot illustrating monthly trends in the number of Coho, Jack Coho and Steelhead salmon passing through the Willamette River \n January 1st, 2001 to December 31st, 2010.") +
+  theme(plot.caption = element_text(hjust = 0))
 ```
 
-Seasonality plot trends:
+#### Seasonality plot trends:
 
 * The greatest numbers of Coho and Jack Coho Salmon are found passing through the Willamette River in the Fall around September/October.
 * Steelhead have more temporal variation in passage counts over the years, with Spring and Summer months typically exhibiting high numbers of fish passings, and very few Steelhead pass through the Willamette River from August through December. 
@@ -164,7 +128,7 @@ fish_annual_counts_plot <- ggplot(data = fish_annual_counts, aes(x = year, y = n
        subtitle = "Jan. 2001 - Dec. 2010",
        x = "Year",
        y = "Number of fish observed (n)",
-       caption = "Figure XX - Annual totals for fish passage of three fish species (Coho in red, Jack Coho in green, \nSteelhead in blue) in the Willamette River from January 2001 to \nDecember 2010. Data from Columbia River DART.") +
+       caption = "Figure 3. Annual totals for fish passage of three fish species (Coho in red, Jack Coho in green, \nSteelhead in blue) in the Willamette River from January 2001 to \nDecember 2010. Data from Columbia River DART.") +
   theme(plot.caption = element_text(hjust = 0))
   
 
@@ -172,6 +136,7 @@ fish_annual_counts_plot
 
                                     
 ```
+
 #### Major Trends in Annual Totals by Species from 2000-2010
 
 - Both Coho and Jack Coho species experienced the lowest number of observed counts in the year 2007. Coho count for the year 2007 was 1050 and Jack Coho count in 2007 was only 164. Steelhead experienced its third lowest count during the year 2007, which indicates 2007 was not a good year for fish count observations across the board. 
