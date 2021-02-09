@@ -23,19 +23,21 @@ library(patchwork)
 ## Overview
 
 
-### Willamette Falls 
+#### Willamette Falls 
 
-```{r photo, echo=FALSE, fig.cap="Panorama of the Willamette Falls. Photo credit: Jeff Green", out.width = '100%'}
+```{r photo, echo=FALSE, fig.cap="Panorama of the Willamette Falls. Photo credit: Jeff Green", out.width='100%'}
 knitr::include_graphics(here("figures", "willamette_falls_pano.jpg"))
 ```
 
-### Location of Willamette Falls fish ladder
+#### Location of Willamette Falls fish ladder
 
 ```{r map, echo=FALSE, fig.cap="Map of the Fish Ladder at Willamette Falls. Photo credit: US Army Corps of Engineers", out.width='100%'}
 knitr::include_graphics(here("figures", "Willamette_Falls_Locks_area_map.jpg"))
 ```
-* Summary
-* Data Citation
+
+##### Using data from the Columbia Basin Research DART on fish passages at the Willamette Falls fish ladder in Oregon, this report presents a time series analysis to identify changes and patterns in fish observations from January 2001 to December 2010. The first time series analysis captures salmon passage observations over the ten year-period for Coho, Jack Coho and Steelhead salmon. Seasonplots are then used to illustrate the annual seasonal peaks in observed fish within each of the three species from 2001 to 2010. Finally, summary statistics illustrate observed trends in the number of observed fish for each of the three salmon species. 
+
+Data Citation: 
 
 ```{r}
 fish <- read_csv(here("data", "willamette_fish_passage.csv")) %>% clean_names()
