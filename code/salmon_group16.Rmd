@@ -23,7 +23,10 @@ library(patchwork)
 ## Overview
 
 
-* Image
+### Willamette Falls 
+
+![Photo by Jeff Green - Own work, CC BY 3.0, https://commons.wikimedia.org/w/index.php?curid=12317559](figures/willamette_falls_pano.jpg)
+
 * Summary
 * Map of fish ladder location
 * Data Citation
